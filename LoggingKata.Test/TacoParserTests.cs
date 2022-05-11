@@ -21,23 +21,41 @@ namespace LoggingKata.Test
 
         }
 
+        //Test whether Longitude method works as expected
         [Theory]
-        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", -84.677017)]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", -84.677017)] //-84.677017 is the expected
         public void ShouldParseLongitude(string line, double expected)
         {
             // TODO: Complete - "line" represents input data we will Parse to
-            //       extract the Longitude.  Your .csv file will have many of these lines,
+            //       extract Longitude.  Your .csv file will have many of these lines,
             //       each representing a TacoBell location
 
-            //Arrange
+            //Arrange --Parse method is inside TacoParser class
+            var tacoParserInstance = new TacoParser();
 
             //Act
+            var actual = tacoParserInstance.Parse(line);
 
             //Assert
+            Assert.Equal(expected, actual.Location.Longitude);
         }
 
 
         //TODO: Create a test ShouldParseLatitude
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", 34.073638)]
+        public void ShouldParseLatitude(string line, double expected)
+        {
 
+            //Arrange --Parse method is inside TacoParser class
+            var tacoParse = new TacoParser();
+
+            //Act
+            var actual = tacoParse.Parse(line);
+
+            //Assert
+            Assert.Equal(expected, actual.Location.Latitude);
+
+        }
     }
 }
